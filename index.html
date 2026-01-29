@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TRACE NODE</title>
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/terminal.css" />
+    <link rel="stylesheet" href="assets/css/effects.css" />
+    <script type="module" defer src="assets/js/app.js"></script>
+  </head>
+  <body>
+    <video id="bgVideo"
+       autoplay
+       muted
+       loop
+       playsinline
+       preload="auto">
+  <source src="assets/video/bg.mp4" type="video/mp4">
+</video>
+
+    <div class="fx-noise"></div>
+    <div class="fx-overlay"></div>
+
+    <main class="wrap" id="wrap">
+      <!-- STEP 1: CHOICE -->
+      <section class="card" id="stepChoice">
+        <div class="hdr">
+          <div class="sig">TRACE//NODE</div>
+        <!--06-->
+          <div class="status">CHANNEL: <span class="ok">LIVE</span></div>
+        </div>
+
+        <h1 class="q" id="question">Правда хочеш знайти мене?</h1>
+      <!--01-->
+
+        <div class="btnArea" id="btnArea">
+          <button class="btn yes" id="yesBtn">Так</button>
+        <!--20-->
+          <button class="btn no" id="noBtn">Ні</button>
+        </div>
+
+        <div class="hint" id="choiceHint"></div>
+      </section>
+
+      <!-- STEP 2: TERMINAL -->
+      <section class="card hidden" id="stepTerminal">
+        <div class="hdr">
+          <div class="sig">TRACE//NODE</div>
+          <div class="status">MODE: <span class="warn">INTERCEPT</span></div>
+        </div>
+
+        <h2 class="q2" id="afterTitle">Ти сама захотіла.</h2>
+
+        <div class="terminal" id="terminal">
+        <!--25-->
+          <div class="termOut" data-terminal-output></div>
+
+          <div class="termIn">
+            <span class="prompt">&gt;</span>
+            <input
+              class="termInput"
+              data-terminal-input
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+        </div>
+
+        <div class="footerRow">
+          <button class="btn ghost" id="replayBtn">Повернутись</button>
+          <div class="micro">hint: “view-source”</div>
+        </div>
+      </section>
+    </main>
+    </body>
+</html>

@@ -1,0 +1,199 @@
+/* === Overlay: scanlines + noise === */
+.fx-overlay {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.18;
+    mix-blend-mode: screen;
+    background:
+        repeating-linear-gradient(to bottom,
+            rgba(0, 255, 120, 0.06),
+            rgba(0, 255, 120, 0.06) 1px,
+            rgba(0, 0, 0, 0) 2px,
+            rgba(0, 0, 0, 0) 4px);
+}
+
+body.trace-mode {
+    animation: traceShake 0.08s infinite alternate;
+}
+
+@keyframes traceShake {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(0.6px, -0.6px);
+    }
+}
+
+.trace-banner {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10000;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    padding: 8px 10px;
+    border: 1px solid rgba(255, 70, 70, .5);
+    color: rgba(255, 160, 160, .95);
+    background: rgba(0, 0, 0, .55);
+    backdrop-filter: blur(4px);
+}
+
+.fx-noise {
+    position: fixed;
+    z-index: -1;
+    inset: -20%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+    animation: noiseMove 0.25s steps(2) infinite;
+}
+
+@keyframes noiseMove {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-2%, 1%);
+    }
+
+    50% {
+        transform: translate(1%, -2%);
+    }
+
+    75% {
+        transform: translate(-1%, -1%);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* === Glitch text helper === */
+.glitch {
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 0 6px rgba(0, 255, 120, .35);
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: .75;
+    clip-path: inset(0 0 0 0);
+}
+
+.glitch::before {
+    transform: translate(1px, 0);
+    filter: hue-rotate(30deg);
+    animation: glitchA 1.2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    transform: translate(-1px, 0);
+    filter: hue-rotate(-30deg);
+    animation: glitchB 1.0s infinite linear alternate-reverse;
+}
+
+@keyframes glitchA {
+    0% {
+        clip-path: inset(10% 0 80% 0);
+    }
+
+    20% {
+        clip-path: inset(60% 0 20% 0);
+    }
+
+    40% {
+        clip-path: inset(30% 0 55% 0);
+    }
+
+    60% {
+        clip-path: inset(75% 0 10% 0);
+    }
+
+    80% {
+        clip-path: inset(5% 0 85% 0);
+    }
+
+    100% {
+        clip-path: inset(40% 0 45% 0);
+    }
+}
+
+@keyframes glitchB {
+    0% {
+        clip-path: inset(80% 0 10% 0);
+    }
+
+    20% {
+        clip-path: inset(20% 0 65% 0);
+    }
+
+    40% {
+        clip-path: inset(55% 0 30% 0);
+    }
+
+    60% {
+        clip-path: inset(10% 0 75% 0);
+    }
+
+    80% {
+        clip-path: inset(85% 0 5% 0);
+    }
+
+    100% {
+        clip-path: inset(45% 0 40% 0);
+    }
+}
+
+/* === Trace mode (пастка): шейк + трохи “червоного” попередження === */
+body.trace-mode {
+    animation: traceShake 0.08s infinite alternate;
+    filter: saturate(1.05) contrast(1.05);
+}
+
+@keyframes traceShake {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(0.6px, -0.6px);
+    }
+}
+
+.trace-banner {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10000;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    padding: 8px 10px;
+    border: 1px solid rgba(255, 70, 70, .5);
+    color: rgba(255, 160, 160, .95);
+    background: rgba(0, 0, 0, .55);
+    box-shadow: 0 0 18px rgba(255, 60, 60, .12);
+    backdrop-filter: blur(4px);
+}
+
+/* === Trap mini-game overlay === */
+.trap-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:10050;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);}
+.trap-card{width:min(560px,92vw);border:1px solid rgba(0,255,120,.35);background:rgba(0,0,0,.65);box-shadow:0 0 24px rgba(0,255,120,.08);border-radius:18px;padding:18px 18px 14px;font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;}
+.trap-title{font-size:18px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;}
+.trap-sub{opacity:.8;margin-bottom:12px;font-size:12px;}
+.trap-seq{border:1px dashed rgba(0,255,120,.28);padding:10px 12px;border-radius:12px;margin-bottom:12px;word-spacing:8px;letter-spacing:.08em;}
+.trap-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.trap-btn{min-width:64px}
+.trap-status{font-size:12px;opacity:.85;}

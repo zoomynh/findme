@@ -1,0 +1,41 @@
+.termOut {
+    min-height: 220px;
+    white-space: pre-wrap;
+}
+
+.termIn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.prompt {
+    opacity: 0.8;
+}
+
+.termInput {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(0, 255, 120, .25);
+    color: inherit;
+    padding: 10px 12px;
+    font-family: inherit;
+    outline: none;
+}
+
+.termInput:disabled {
+    opacity: .5;
+}
+
+/* Кнопка "Ні" стає рухомою */
+.btn.no.evade {
+    position: fixed;
+    z-index: 10001;
+    transition: left 140ms ease, top 140ms ease, transform 140ms ease;
+}
+
+/* Невеликий "поштовх" при втечі */
+.btn.no.evade.bump {
+    transform: scale(1.03);
+}

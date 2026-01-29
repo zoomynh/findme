@@ -1,0 +1,102 @@
+{
+  "startStage": "stage-01",
+  "stages": {
+    "stage-01": {
+      "title": "handshake",
+      "lines": [
+        "connection established.",
+        "type help"
+      ],
+      "commands": {
+        "help": {
+          "reply": [
+            "commands available:",
+            "help",
+            "collect"
+          ]
+        },
+        "collect": {
+          "reply": [
+            "fragments detected: 4",
+            "hint: view-source",
+            "example: unlock ********"
+          ],
+          "next": "stage-02"
+        }
+      }
+    },
+    "stage-02": {
+      "title": "decompression",
+      "lines": [
+        "find the 8 digits hidden in the source.",
+        "then use: unlock <code>"
+      ],
+      "unlock": {
+        "prefix": "unlock ",
+        "expected": "06012025",
+        "next": "stage-03"
+      },
+      "commands": {
+        "help": {
+          "reply": [
+            "no help. you either unlock or you don't."
+          ]
+        }
+      }
+    },
+    "stage-03": {
+      "title": "trace",
+      "lines": [
+        "alert: trace enabled",
+        "you have 10:00 to stabilize the channel.",
+        "mini-game started..."
+      ],
+      "commands": {
+        "help": {
+          "reply": [
+            "focus. stabilize first."
+          ]
+        }
+      }
+    },
+    "stage-04": {
+      "title": "post-trace",
+      "lines": [
+        "trace neutralized.",
+        "type help"
+      ],
+      "commands": {
+        "help": {
+          "reply": [
+            "commands available:",
+            "help",
+            "end"
+          ]
+        },
+        "end": {
+          "reply": [
+            "ти точно готова? (write: ready)"
+          ],
+          "next": "stage-05"
+        }
+      }
+    },
+    "stage-05": {
+      "title": "confirm",
+      "lines": [
+        "type ready to continue."
+      ],
+      "commands": {
+        "ready": {
+          "reply": [
+            "ok. moving to next stage..."
+          ],
+          "action": {
+            "type": "redirect",
+            "to": "next.html"
+          }
+        }
+      }
+    }
+  }
+}
