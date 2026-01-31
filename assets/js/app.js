@@ -15,6 +15,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const outEl = document.querySelector("[data-terminal-output]");
   const inEl  = document.querySelector("[data-terminal-input]");
 
+  const IG_URL = "https://www.instagram.com/whereiam2026/";
+
+function printToken(label, url) {
+  const row = document.createElement("div");
+  row.className = "termTokenRow";
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.textContent = `[ ${label} ]`;
+  a.className = "termToken";
+  a.addEventListener("click", () => beep(900, 70, 0.04));
+
+  row.appendChild(a);
+  outEl.appendChild(row);
+  outEl.scrollTop = outEl.scrollHeight;
+}
+
+
   if (!yesBtn || !noBtn || !outEl || !inEl) {
     console.error("Critical DOM elements not found");
     return;
@@ -290,14 +310,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // READY
-    if (stage === "ready") {
-      if (cmd === "ready") {
-        printLine("ok.");
-        printLine("next stage unlocked.");
-        return;
-      }
-      printLine("type: ready");
-    }
+if (stage === "ready") {
+  if (cmd === "ready") {
+    printLine("…");
+    printLine("this path is not reversible.");
+    printLine("type: open");
+    stage = "final-open";
+    return;
+  }
+  printLine("type: ready");
+  return;
+}
+
+// FINAL OPEN
+if (stage === "final-open") {
+  if (cmd === "open") {
+    printLine("opening external node…");
+    printLine("session token generated:");
+    printToken("where am i", IG_URL);
+    printLine("click the token.");
+    stage = "final-token";
+    return;
+  }
+  printLine("type: open");
+  return;
+}
+
+// FINAL TOKEN (після токена вже нічого не треба, але можемо підтримати ще раз open)
+if (stage === "final-token") {
+  if (cmd === "open") {
+    // дубль на випадок якщо користувач не клікнув
+    window.open(IG_URL, "_blank", "noopener,noreferrer");
+    printLine("signal forwarded.");
+    return;
+  }
+  printLine("click the token.");
+  return;
+}
+
   }
 
   showChoice();

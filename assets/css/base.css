@@ -274,3 +274,21 @@ body {
 .btn.no.evade.bump {
     transform: scale(1.05);
 }
+
+.termTokenRow {
+    margin-top: 6px;
+}
+
+.termToken {
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid rgba(0, 255, 120, .35);
+    padding: 4px 8px;
+    display: inline-block;
+    letter-spacing: 0.08em;
+}
+
+.termToken:hover {
+    border-color: rgba(0, 255, 120, .7);
+    text-shadow: 0 0 10px rgba(0, 255, 120, .35);
+}
